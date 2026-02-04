@@ -381,7 +381,7 @@ When multiple scanners share the same MPC, they will conflict with each other be
 
 - **Email:** [ghdud0503@gmail.com](mailto:ghdud0503@gmail.com)
 - **Issues:** [Open a GitHub Issue](https://github.com/Ho-yeong/WorldScannerDocs/issues)
-- **Documentation:** [Studio3F YouTube](https://www.youtube.com/@studio_3f)
+- **Documentation:** [Studio3F YouTube](https://www.youtube.com/@STUDIO3F_G)
 
 ---
 
