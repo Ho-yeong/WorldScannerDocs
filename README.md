@@ -6,7 +6,7 @@
 
 **Plugin Name:** WorldScanner
 **Version:** 1.1.0
-**Supported Engines:** UE 5.5, 5.6
+**Supported Engines:** UE 5.5 - 5.7
 **Purpose:** Reveal objects inside a growing sphere - ideal for scanning, pulse, or detection effects.
 
 ### What's New in v1.1.0
@@ -24,7 +24,7 @@
 | `AScannerController` | Standalone controller actor |
 | `UScannerComponent` | Component for any actor (NEW) |
 | `MF_ScanMask_MPC` | Material function for masking |
-| `MPC_Scannerner` | Material Parameter Collection |
+| `MPC_Scanner` | Material Parameter Collection |
 | `BP_ScanFX` | Visual FX sphere mesh |
 
 ---
@@ -36,8 +36,7 @@
 3. Enable the plugin from **Edit > Plugins > Installed > WorldScanner**.
 4. Restart again if prompted.
 
-<!-- IMAGE: UI_PluginList.png - Plugins 창에서 WorldScanner 활성화된 상태 -->
-
+![UI_PluginList](./pics/UI_PluginList.png)
 ---
 
 ## 3. Quick Start
@@ -49,7 +48,7 @@
 3. (Optional) Assign a `FollowActor` to track player or object.
 4. Call `StartScan()` from Blueprint or C++.
 
-<!-- IMAGE: LV_QuickStart_Controller.png - 레벨에 BP_ScannerController 배치, Details 패널에 MPC_Scanner 할당된 상태 -->
+![LV_QuickStart_Controller](./pics/LV_QuickStart_Controller.jpg)
 
 ### Option B: Using ScannerComponent (NEW)
 
@@ -58,24 +57,21 @@
 3. Assign `MPC_Scanner` in the component's details.
 4. Call `StartScan()` on the component.
 
-<!-- IMAGE: BP_QuickStart_Component.png - 액터 BP에서 ScannerComponent 추가, Details에 MPC_Scanner 할당 -->
+![LV_QuickStart_Controller](./pics/BP_QuickStart_Component.jpg)
 
 ### Blueprint Example
 
-```
-[Input Action: Scan] --> [Get ScannerController] --> [StartScan]
-```
-
-<!-- IMAGE: BP_QuickStart_InputBinding.png - Input Action에서 StartScan 호출하는 간단한 BP 노드 -->
+![BP_QuickStart_InputBinding](./pics/BP_QuickStart_InputBinding.png)
 
 ### C++ Example
 
 ```cpp
 #include "ScanFunctionLibrary.h"
 #include "ScannerController.h"
+#include "ScannerComponent.h"
 
 // Using Controller
-if (AScannerController* Scanner = UScanFunctionLibrary::GetScannerController(GetWorld()))
+if (AScannerController* Scanner = UScanFunctionLibrary::GetWorldScannerController(this))
 {
     Scanner->StartScan();
 }
@@ -122,6 +118,7 @@ To apply the reveal mask to your materials:
 | **MaxRadius** | `Float` | 2000.0 | Maximum expansion limit (cm) |
 
 <!-- IMAGE: DT_Params_Core.png - Details 패널의 Scan 카테고리 (ScannerMPC, StartRadius, ExpandSpeed, MaxRadius 보이게) -->
+![DT_Params_Core](./pics/DT_Params_Core.png)
 
 ### Easing Options (NEW)
 
@@ -136,7 +133,7 @@ To apply the reveal mask to your materials:
 | `EaseOut` | Fast start, slow end |
 | `EaseInOut` | Smooth acceleration and deceleration |
 
-<!-- IMAGE: DT_Params_Easing.png - ScanEasing 드롭다운 펼친 상태 (4개 옵션 보이게) -->
+![DT_Params_Easing](./pics/DT_Params_Easing.png)
 
 <!-- IMAGE: GIF_Easing_Comparison.gif - Linear vs EaseOut 비교 (나란히 또는 순차적으로) -->
 
@@ -151,7 +148,7 @@ To apply the reveal mask to your materials:
 | `Expand` | Center to outside (default) |
 | `Contract` | Outside to center (reverse) |
 
-<!-- IMAGE: DT_Params_Direction.png - ScanDirection 드롭다운 펼친 상태 -->
+![DT_Params_Direction](./pics/DT_Params_Direction.jpg)
 
 <!-- IMAGE: GIF_Direction_Contract.gif - Contract 모드 동작 (바깥에서 안쪽으로) -->
 
@@ -164,7 +161,7 @@ To apply the reveal mask to your materials:
 | **SoftStopHoldSeconds** | `Float` | 0.0 | Hold duration after soft stop (0=infinite) (NEW) |
 | **bSoftStopUsesCooldown** | `Bool` | true | Apply cooldown after soft stop (NEW) |
 
-<!-- IMAGE: DT_Params_Timing.png - Timing 카테고리 펼친 상태 -->
+![DT_Params_Timing](./pics/DT_Params_Timing.png)
 
 ### Visual FX
 
@@ -196,22 +193,7 @@ To apply the reveal mask to your materials:
 ### Blueprint Binding
 
 <!-- IMAGE: BP_Events_Binding.png - BeginPlay에서 OnScanComplete 바인딩하는 노드 (Bind Event to OnScanComplete -> Custom Event) -->
-
-```
-[BeginPlay]
-    |
-    v
-[Get ScannerController Reference]
-    |
-    v
-[Bind Event to OnScanComplete]
-    |
-    v
-[Custom Event: HandleComplete]
-    |
-    v
-[Print String: "Scan Complete at {FinalRadius}"]
-```
+![BP_Events_Binding](./pics/BP_Events_Binding.png)
 
 ### C++ Binding
 
@@ -274,6 +256,7 @@ bool IsInCooldown();          // true if in Cooldown state
 ```
 
 <!-- IMAGE: DG_StateMachine.png - 상태 머신 다이어그램 (Idle -> Expanding -> HoldingAtMax -> Cooldown -> Idle) -->
+![DG_StateMachine](./pics/DG_StateMachine.png)
 
 ---
 
@@ -296,6 +279,7 @@ Scanner->SetRadiusNormalized(0.5f);
 ### Blueprint Nodes
 
 <!-- IMAGE: BP_RuntimeControl.png - GetCurrentRadius, SetRadius, SetRadiusNormalized 노드들 -->
+![BP_RuntimeControl](./pics/BP_RuntimeControl.png)
 
 ---
 

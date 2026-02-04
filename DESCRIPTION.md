@@ -35,6 +35,6 @@ Supported Development Platforms:
 Windows: Yes
 Mac: Yes
 
-Supported Target Build Platforms: 5.5 - 5.6
+Supported Target Build Platforms: 5.5, 5.6, 5.7
 Documentation Link: https://github.com/Ho-yeong/WorldScannerDocs
 Create Issues: https://github.com/Ho-yeong/WorldScannerDocs/issues
