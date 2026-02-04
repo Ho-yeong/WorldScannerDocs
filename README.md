@@ -379,7 +379,7 @@ When multiple scanners share the same MPC, they will conflict with each other be
 
 ## 14. Contact / Support
 
-- **Email:** [ghduD0503@gmail.com](mailto:ghduD0503@gmail.com)
+- **Email:** [ghdud0503@gmail.com](mailto:ghdud0503@gmail.com)
 - **Issues:** [Open a GitHub Issue](https://github.com/Ho-yeong/WorldScannerDocs/issues)
 - **Documentation:** [Studio3F YouTube](https://www.youtube.com/@studio_3f)
 
